@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
 
   # /items POST
   def create
-    @item = Item.create(article_params)
+    @item = Item.create(item_params)
     if @item.errors.empty?
       redirect_to item_path(@item)
     else
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
 
   # /items/1 PUT/
   def update
-    @item.update_attributes(article_params)
+    @item.update_attributes(item_params)
     if @item.errors.empty?
       redirect_to item_path(@item)
     else
@@ -63,8 +63,8 @@ class ItemsController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:item).permit(:price, :name, :description, :weight)
+  def item_params
+    params.require(:item).permit! # или (:price, :name, :description, :weight, :real, :image)
   end
 
   def find_item
